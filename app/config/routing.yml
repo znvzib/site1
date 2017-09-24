@@ -1,0 +1,46 @@
+app:
+    resource: '@AppBundle/Controller/'
+    type: annotation
+
+#blog_list:
+    #path:   /blog/{page}/{sort}
+    #defaults: { _controller: "AppBundle:Default:blog", page: 0, sort: 'desc' }
+    #requirements:
+        #page: \d+
+        #methods: [GET, HEAD]
+    
+# blog_another:
+    # path:   /blog
+    #defaults: { _controller: "AppBundle:Default:blogNew" }   
+    
+#1. создать маршрут /news
+#2. создать маршрут /news/veiw/tesla-new-car - где "tesla-new-car" обязательный параметр
+#3. создать маршрут /news/page/1 где - "1" опциональный параметр
+#4. создать маршрут /news/page/1/sort/title/order/desc где - "1", "title", "desc" обязательный параметр
+#5. создать маршрут /ua/news где - "ua" опциональный параметр, по умолчанию "ua" и может принимать только 3 значения (ua, ru, en)
+
+news:
+    path:   /news
+    defaults: { _controller: "AppBundle:Default:news" }  
+    
+news_veiw:
+    path:   /news/veiw/{tesla-new-car}
+    defaults: { _controller: "AppBundle:Default:veiw" }  
+    
+news_page:
+    path:   /news/page/{num}
+    defaults: { _controller: "AppBundle:Default:page", num: 1 }      
+    requirements:
+        num: \d+
+    
+ news_multi_page:
+    path:   /news/page/{num}/{sort}/{title}/{order}/{desc}/
+    defaults: { _controller: "AppBundle:Default:multi_page", num: 1 }      
+    requirements:
+        num: \d+   
+    
+ua_news:
+    path:   /ua/news
+    defaults: { _controller: "AppBundle:Default:news" } 
+    requirements:
+        ua: \(ua|ru|en)  
